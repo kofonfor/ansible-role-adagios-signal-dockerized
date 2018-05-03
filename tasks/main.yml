@@ -1,0 +1,12 @@
+---
+- name: make a build dir
+  file: state=directory name=/root/adagios-signal-dockerized
+
+- name: put Dockerfile
+  template: src=Dockerfile dest=/root/adagios-signal-dockerized/Dockerfile
+
+- name: build a Docker image for Adagios with Signal CLI
+  command: docker build -t kofonfor/adagios-git-signal-cli:0.1.0 --rm /root/adagios-signal-dockerized
+
+- name: tag it as latest
+  command: docker build -t kofonfor/adagios-git-signal-cli:latest --rm /root/adagios-signal-dockerized
